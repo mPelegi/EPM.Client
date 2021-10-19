@@ -14,9 +14,11 @@ namespace EPM.Client.Models
         #endregion
 
         #region Performance
-        public double MaxClockSpeed { get; set; }
-        public double ActualClockSpeed { get; set; }
-        public double LoadPercentage { get; set; }
+        public decimal MaxClockSpeedGHz { get; set; }
+        public decimal ActualClockSpeedGHz { get; set; }
+        public decimal MaxClockSpeedMHz { get; set; }
+        public decimal ActualClockSpeedMHz { get; set; }
+        public decimal LoadPercentage { get; set; }
         #endregion
 
 

@@ -31,7 +31,7 @@ namespace EPM.Client.DataCollector.Hardware
                 retorno.Name = Convert.ToString(obj["Name"]);
                 retorno.Manufacturer = Convert.ToString(obj["AdapterCompatibility"]);
                 //Unfortunately, WMI is only able to view up to 4.3gb of video memory, in my case I have 6gb, so I'll have to take it directly from the device name 
-                retorno.DedicatedMemory = retorno.Name.Substring(retorno.Name.IndexOf("GB") - 2, 2).Trim();
+                retorno.DedicatedMemoryGB = retorno.Name.Substring(retorno.Name.IndexOf("GB") - 2, 2).Trim();
             }
 
             return retorno;
@@ -40,7 +40,7 @@ namespace EPM.Client.DataCollector.Hardware
         public GpuModel GetPerformance()
         {
             GpuModel retorno = new GpuModel();
-            retorno.LoadPercentage = GpuLoadPercentage();
+            retorno.LoadPercentage = Math.Round(GpuLoadPercentage(), 2);
 
 
             return retorno;
@@ -67,21 +67,21 @@ namespace EPM.Client.DataCollector.Hardware
             }
         }
 
-        private static double GpuLoadPercentage()
+        private static decimal GpuLoadPercentage()
         {
-            double result = 0d;
+            decimal result = 0m;
             try
             {
                 GpuCounters.ForEach(x =>
                 {
-                    result += x.NextValue();
+                    result += (decimal)x.NextValue();
                 });
 
                 return result;
             }
             catch
             {
-                return 0d;
+                return 0m;
             }
         }
     }

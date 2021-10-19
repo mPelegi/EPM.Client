@@ -71,8 +71,10 @@ namespace EPM.Client.DataCollector.Hardware
 
                 if (d.IsReady == true)
                 {
-                    drive.AvailableSize = SizeConverter.ToConvert(d.TotalFreeSpace);
-                    drive.TotalSize = SizeConverter.ToConvert(d.TotalSize);
+                    drive.AvailableSizeMB = SizeConverter.ByteToMegabyte((ulong)d.TotalFreeSpace);
+                    drive.TotalSizeMB = SizeConverter.ByteToMegabyte((ulong)d.TotalSize);
+                    drive.AvailableSizeGB = SizeConverter.ByteToGigabyte((ulong)d.TotalFreeSpace);
+                    drive.TotalSizeGB = SizeConverter.ByteToGigabyte((ulong)d.TotalSize);
                 }
 
                 retorno.Add(drive);

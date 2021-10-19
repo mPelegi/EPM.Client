@@ -39,24 +39,54 @@ namespace EPM.Client.Helpers
             return string.Format("{0:n1} {1}", adjustedSize, SizeSuffixes[mag]);
         }
 
-        public static double ByteToGigabyte(UInt64 value)
+        public static decimal ByteToGigabyte(UInt64 value)
         {
             if (value == 0)
             {
-                return 0d;
+                return 0m;
             }
 
-            return Math.Round((value / 1073741824d), 1);
+            return Math.Round((value / 1073741824m), 1);
         }
 
-        public static double KilobyteToGigabyte(UInt64 value)
+        public static decimal ByteToMegabyte(UInt64 value)
         {
             if (value == 0)
             {
-                return 0d;
+                return 0m;
             }
 
-            return Math.Round((value / 1048576d), 1);
+            return Math.Round((value / 1048576m), 1);
+        }
+
+        public static decimal KilobyteToMegabyte(UInt64 value)
+        {
+            if (value == 0)
+            {
+                return 0m;
+            }
+
+            return Math.Round((value / 1024m), 1);
+        }
+
+        public static decimal KilobyteToGigabyte(UInt64 value)
+        {
+            if (value == 0)
+            {
+                return 0m;
+            }
+
+            return Math.Round((value / 1048576m), 1);
+        }
+
+        public static decimal MHzToGHz(UInt32 value)
+        {
+            if (value == 0)
+            {
+                return 0m;
+            }
+
+            return Math.Round((value / 1000m), 1);
         }
     }
 }

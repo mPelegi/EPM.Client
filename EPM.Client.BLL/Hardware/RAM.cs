@@ -45,8 +45,10 @@ namespace EPM.Client.DataCollector.Hardware
 
             foreach (ManagementObject obj in OperatingSystemSearcher.Get())
             {
-                retorno.FreeMemory = SizeConverter.KilobyteToGigabyte((ulong)obj["FreePhysicalMemory"]);
-                retorno.TotalMemory = SizeConverter.KilobyteToGigabyte((ulong)obj["TotalVisibleMemorySize"]);
+                retorno.FreeMemoryMB = SizeConverter.KilobyteToMegabyte((ulong)obj["FreePhysicalMemory"]);
+                retorno.TotalMemoryMB = SizeConverter.KilobyteToMegabyte((ulong)obj["TotalVisibleMemorySize"]);
+                retorno.FreeMemoryGB = SizeConverter.KilobyteToGigabyte((ulong)obj["FreePhysicalMemory"]);
+                retorno.TotalMemoryGB = SizeConverter.KilobyteToGigabyte((ulong)obj["TotalVisibleMemorySize"]);
             }
 
 

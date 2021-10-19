@@ -9,11 +9,11 @@ namespace EPM.Client.Models
         #region Description
         public string Name { get; set; }
         public string Manufacturer { get; set; }
-        public string DedicatedMemory { get; set; }
+        public string DedicatedMemoryGB { get; set; }
         #endregion
 
         #region Performance
-        public double LoadPercentage { get; set; }
+        public decimal LoadPercentage { get; set; }
         #endregion
     }
 }

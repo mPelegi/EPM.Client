@@ -15,8 +15,10 @@ namespace EPM.Client.Models
         #endregion
 
         #region Performance
-        public double FreeMemory { get; set; }
-        public double TotalMemory { get; set; }
+        public decimal FreeMemoryMB { get; set; }
+        public decimal FreeMemoryGB { get; set; }
+        public decimal TotalMemoryMB { get; set; }
+        public decimal TotalMemoryGB { get; set; }
         #endregion
     }
 }

@@ -16,8 +16,10 @@ namespace EPM.Client.Models
 
         #region Performance
         public string LogicalDisk { get; set; }
-        public string TotalSize { get; set; }
-        public string AvailableSize { get; set; }
+        public decimal TotalSizeMB { get; set; }
+        public decimal TotalSizeGB { get; set; }
+        public decimal AvailableSizeMB { get; set; }
+        public decimal AvailableSizeGB { get; set; }
         #endregion
     }
 }

@@ -1,4 +1,5 @@
-﻿using EPM.Client.Models;
+﻿using EPM.Client.Helpers;
+using EPM.Client.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -41,22 +42,24 @@ namespace EPM.Client.DataCollector.Hardware
 
             foreach (ManagementObject obj in ProcessorSearcher.Get())
             {
-                retorno.MaxClockSpeed = Convert.ToDouble(obj["MaxClockSpeed"]) / 1000;
-                retorno.ActualClockSpeed = retorno.MaxClockSpeed * CpuClockPercentage() / 100;
-                retorno.LoadPercentage = CpuLoadPercentage();
+                retorno.MaxClockSpeedMHz = Convert.ToDecimal(obj["MaxClockSpeed"]);
+                retorno.MaxClockSpeedGHz = SizeConverter.MHzToGHz((uint)obj["MaxClockSpeed"]);
+                retorno.ActualClockSpeedMHz = retorno.MaxClockSpeedMHz * CpuClockPercentage() / 100;
+                retorno.ActualClockSpeedGHz = retorno.MaxClockSpeedGHz * CpuClockPercentage() / 100;
+                retorno.LoadPercentage = Math.Round(CpuLoadPercentage(), 2);
             }
 
             return retorno;
         }
 
-        private double CpuClockPercentage()
+        private decimal CpuClockPercentage()
         {
-            return (double)PerformanceCounter.NextValue();
+            return (decimal)PerformanceCounter.NextValue();
         }
 
-        private double CpuLoadPercentage()
+        private decimal CpuLoadPercentage()
         {
-            return (double)LoadCounter.NextValue();
+            return (decimal)LoadCounter.NextValue();
         }
     }
 }
