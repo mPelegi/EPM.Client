@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EPM.Client.BLL\EPM.Client.Gatherer.csproj" />
+    <ProjectReference Include="..\EPM.Client.BLL\EPM.Client.BLL.csproj" />
   </ItemGroup>
 
 </Project>

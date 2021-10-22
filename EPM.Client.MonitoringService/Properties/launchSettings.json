@@ -1,0 +1,10 @@
+﻿{
+  "profiles": {
+    "EPM.Client.MonitoringService": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

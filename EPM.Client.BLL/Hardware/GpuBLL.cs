@@ -7,24 +7,24 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace EPM.Client.DataCollector.Hardware
+namespace EPM.Client.BLL.Hardware
 {
     //Adaptar
-    public class GPU
+    public class GpuBLL
     {
         private static string VideoControllerQuery = "SELECT * FROM Win32_VideoController";
         private ManagementObjectSearcher VideoControllerSearcher = new ManagementObjectSearcher(VideoControllerQuery);
         private static List<PerformanceCounter> GpuCounters = new List<PerformanceCounter>();
 
-        public GPU()
+        public GpuBLL()
         {
             SetGpuCounters();
             GpuLoadPercentage();
         }
 
-        public GpuModel GetDescription()
+        public GpuDTO GetDescription()
         {
-            GpuModel retorno = new GpuModel();
+            GpuDTO retorno = new GpuDTO();
 
             foreach (ManagementObject obj in VideoControllerSearcher.Get())
             {
@@ -37,9 +37,9 @@ namespace EPM.Client.DataCollector.Hardware
             return retorno;
         }
 
-        public GpuModel GetPerformance()
+        public GpuDTO GetPerformance()
         {
-            GpuModel retorno = new GpuModel();
+            GpuDTO retorno = new GpuDTO();
             retorno.LoadPercentage = Math.Round(GpuLoadPercentage(), 2);
 
 

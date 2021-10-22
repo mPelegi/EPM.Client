@@ -4,21 +4,21 @@ using System.Collections.Generic;
 using System.Management;
 using System.Text;
 
-namespace EPM.Client.DataCollector.Hardware
+namespace EPM.Client.BLL.Hardware
 {
-    public class MOBO
+    public class MoboBLL
     {
         private static string MotherboardQuery = "SELECT * FROM Win32_ComputerSystem";
         private ManagementObjectSearcher MotherboardSearcher = new ManagementObjectSearcher(MotherboardQuery);
 
-        public MOBO()
+        public MoboBLL()
         {
 
         }
 
-        public MoboModel GetDescription()
+        public MoboDTO GetDescription()
         {
-            MoboModel retorno = new MoboModel();
+            MoboDTO retorno = new MoboDTO();
 
             foreach (ManagementObject obj in MotherboardSearcher.Get())
             {

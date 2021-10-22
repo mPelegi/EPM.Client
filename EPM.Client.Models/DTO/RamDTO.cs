@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace EPM.Client.Models
+namespace EPM.Client.Models.DTO
 {
-    public class RamModel
+    public class RamDTO
     {
         #region Description
         public string PartNumber { get; set; }

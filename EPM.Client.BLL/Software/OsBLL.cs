@@ -4,21 +4,21 @@ using System.Collections.Generic;
 using System.Management;
 using System.Text;
 
-namespace EPM.Client.DataCollector.Software
+namespace EPM.Client.BLL.Software
 {
-    public class OS
+    public class OsBLL
     {
         private static string OperatingSystemQuery = "SELECT * FROM Win32_OperatingSystem";
         private ManagementObjectSearcher OperatingSystemSearcher = new ManagementObjectSearcher(OperatingSystemQuery);
 
-        public OS()
+        public OsBLL()
         {
 
         }
 
-        public OSModel GetDescription()
+        public OsDTO GetDescription()
         {
-            OSModel retorno = new OSModel();
+            OsDTO retorno = new OsDTO();
 
             foreach (ManagementObject obj in OperatingSystemSearcher.Get())
             {

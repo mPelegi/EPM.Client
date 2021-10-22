@@ -6,28 +6,28 @@ using System.IO;
 using System.Management;
 using System.Text;
 
-namespace EPM.Client.DataCollector.Hardware
+namespace EPM.Client.BLL.Hardware
 {
-    public class Drive
+    public class DriveBLL
     {
         private static string DiskDriveQuery = "SELECT * FROM Win32_DiskDrive";
         private ManagementObjectSearcher DiskDriveSearcher = new ManagementObjectSearcher(DiskDriveQuery);
         private DriveInfo[] AllDrives = DriveInfo.GetDrives();
 
-        public Drive()
+        public DriveBLL()
         {
             
         }
 
-        public List<DriveModel> GetDescription()
+        public List<DriveDTO> GetDescription()
         {
-            List<DriveModel> retorno = new List<DriveModel>();
+            List<DriveDTO> retorno = new List<DriveDTO>();
 
             string deviceID = null;
             string drivePartition = null;
             foreach (ManagementObject obj in DiskDriveSearcher.Get())
             {
-                DriveModel drive = new DriveModel();
+                DriveDTO drive = new DriveDTO();
 
                 drive.Model = Convert.ToString(obj["Model"]);
                 drive.InterfaceType = Convert.ToString(obj["InterfaceType"]);
@@ -59,22 +59,22 @@ namespace EPM.Client.DataCollector.Hardware
             return retorno;
         }
 
-        public List<DriveModel> GetPerformance()
+        public List<DriveDTO> GetPerformance()
         {
-            List<DriveModel> retorno = new List<DriveModel>();
+            List<DriveDTO> retorno = new List<DriveDTO>();
 
             foreach (DriveInfo d in AllDrives)
             {
-                DriveModel drive = new DriveModel();
+                DriveDTO drive = new DriveDTO();
 
                 drive.LogicalDisk = d.Name.Replace(@"\", "");
 
                 if (d.IsReady == true)
                 {
-                    drive.AvailableSizeMB = SizeConverter.ByteToMegabyte((ulong)d.TotalFreeSpace);
-                    drive.TotalSizeMB = SizeConverter.ByteToMegabyte((ulong)d.TotalSize);
-                    drive.AvailableSizeGB = SizeConverter.ByteToGigabyte((ulong)d.TotalFreeSpace);
-                    drive.TotalSizeGB = SizeConverter.ByteToGigabyte((ulong)d.TotalSize);
+                    drive.AvailableSizeMB = UnitConverter.ByteToMegabyte((ulong)d.TotalFreeSpace);
+                    drive.TotalSizeMB = UnitConverter.ByteToMegabyte((ulong)d.TotalSize);
+                    drive.AvailableSizeGB = UnitConverter.ByteToGigabyte((ulong)d.TotalFreeSpace);
+                    drive.TotalSizeGB = UnitConverter.ByteToGigabyte((ulong)d.TotalSize);
                 }
 
                 retorno.Add(drive);

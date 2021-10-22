@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace EPM.Client.DataCollector.Base
+namespace EPM.Client.BLL.Base
 {
-    internal class BaseGatherer
+    public class BaseBLL
     {
     }
 }

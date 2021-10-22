@@ -5,32 +5,32 @@ using System.Collections.Generic;
 using System.Management;
 using System.Text;
 
-namespace EPM.Client.DataCollector.Hardware
+namespace EPM.Client.BLL.Hardware
 {
-    public class RAM
+    public class RamBLL
     {
         private static string MemoryQuery = "SELECT * FROM Win32_PhysicalMemory";
         private static string OperatingSystemQuery = "SELECT * FROM Win32_OperatingSystem";
         private ManagementObjectSearcher MemorySearcher = new ManagementObjectSearcher(MemoryQuery);
         private ManagementObjectSearcher OperatingSystemSearcher = new ManagementObjectSearcher(OperatingSystemQuery);
 
-        public RAM()
+        public RamBLL()
         {
 
         }
 
-        public List<RamModel> GetDescription()
+        public List<RamDTO> GetDescription()
         {
-            List<RamModel> retorno = new List<RamModel>();
+            List<RamDTO> retorno = new List<RamDTO>();
 
             foreach (ManagementObject obj in MemorySearcher.Get())
             {
-                RamModel ramAux = new RamModel();
+                RamDTO ramAux = new RamDTO();
 
                 ramAux.PartNumber = Convert.ToString(obj["PartNumber"]);
                 ramAux.ClockSpeed = Convert.ToString(obj["ConfiguredClockSpeed"]);
                 ramAux.Manufacturer = Convert.ToString(obj["Manufacturer"]);
-                ramAux.Capacity = SizeConverter.ToConvert((ulong)obj["Capacity"]);
+                ramAux.Capacity = UnitConverter.ToConvert((ulong)obj["Capacity"]);
                 ramAux.Tag = Convert.ToString(obj["Tag"]);
 
                 retorno.Add(ramAux);
@@ -39,16 +39,16 @@ namespace EPM.Client.DataCollector.Hardware
             return retorno;
         }
 
-        public RamModel GetPerformance()
+        public RamDTO GetPerformance()
         {
-            RamModel retorno = new RamModel();
+            RamDTO retorno = new RamDTO();
 
             foreach (ManagementObject obj in OperatingSystemSearcher.Get())
             {
-                retorno.FreeMemoryMB = SizeConverter.KilobyteToMegabyte((ulong)obj["FreePhysicalMemory"]);
-                retorno.TotalMemoryMB = SizeConverter.KilobyteToMegabyte((ulong)obj["TotalVisibleMemorySize"]);
-                retorno.FreeMemoryGB = SizeConverter.KilobyteToGigabyte((ulong)obj["FreePhysicalMemory"]);
-                retorno.TotalMemoryGB = SizeConverter.KilobyteToGigabyte((ulong)obj["TotalVisibleMemorySize"]);
+                retorno.FreeMemoryMB = UnitConverter.KilobyteToMegabyte((ulong)obj["FreePhysicalMemory"]);
+                retorno.TotalMemoryMB = UnitConverter.KilobyteToMegabyte((ulong)obj["TotalVisibleMemorySize"]);
+                retorno.FreeMemoryGB = UnitConverter.KilobyteToGigabyte((ulong)obj["FreePhysicalMemory"]);
+                retorno.TotalMemoryGB = UnitConverter.KilobyteToGigabyte((ulong)obj["TotalVisibleMemorySize"]);
             }
 
 

@@ -2,15 +2,18 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace EPM.Client.Models
+namespace EPM.Client.Models.DTO
 {
-    public class OSModel
+    public class GpuDTO
     {
         #region Description
         public string Name { get; set; }
         public string Manufacturer { get; set; }
-        public string CSName { get; set; }
-        public string RegisteredUser { get; set; }
+        public string DedicatedMemoryGB { get; set; }
+        #endregion
+
+        #region Performance
+        public decimal LoadPercentage { get; set; }
         #endregion
     }
 }

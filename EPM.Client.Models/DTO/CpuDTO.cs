@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace EPM.Client.Models
+namespace EPM.Client.Models.DTO
 {
-    public class CpuModel
+    public class CpuDTO
     {
         #region Description
         public string Name { get; set; }

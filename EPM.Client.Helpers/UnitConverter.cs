@@ -4,7 +4,7 @@ using System.Text;
 
 namespace EPM.Client.Helpers
 {
-    public class SizeConverter
+    public class UnitConverter
     {
         private static readonly string[] SizeSuffixes = { "bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB" };
 
